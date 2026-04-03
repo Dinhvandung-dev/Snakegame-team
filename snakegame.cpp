@@ -177,8 +177,21 @@ public:
 };
 
 
-int main()
-{
-    // TODO: Setup game loop
+int main() {
+    cout << endl;
+    system("mode con cols=100 lines=30");
+    SetConsoleOutputCP(437);
+    
+    CONSOLE_CURSOR_INFO info;
+    GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+    info.bVisible = false;
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+
+    ManHinhStart();
+    VeKhung();
+    VeThongTin(0, 150);
+
+    // TODO: Chờ Hiếu ghép vòng lặp Logic vào
+    
     return 0;
 }
