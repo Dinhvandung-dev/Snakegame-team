@@ -90,9 +90,6 @@ public:
     int speed;
     int score;
 
-
-
-
     CONRAN() {
         DoDai = 3;
         A[0] = {10, 10};
@@ -123,9 +120,6 @@ public:
             }
         } while (trung);
 
-
-
-
         SetColor(12);
         gotoxy(Moi.x, Moi.y);
         cout << char(219) << char(219);
@@ -144,7 +138,6 @@ public:
 
         return tail;
     }
-
 
     void Ve(Point tail) {
         if (tail.x != A[DoDai - 1].x || tail.y != A[DoDai - 1].y) {
@@ -170,7 +163,16 @@ public:
         }
     }
 
+    bool KiemTraChet() {       
+        if (A[0].x < 2 || A[0].x > WIDTH - 2 || A[0].y <= 0 || A[0].y >= HEIGHT)
+            return true;
 
+        // Kiểm tra cắn vào thân
+        for (int i = 1; i < DoDai; i++)
+            if (A[0].x == A[i].x && A[0].y == A[i].y)
+                return true;
+        return false;
+    }
 
 };
 
