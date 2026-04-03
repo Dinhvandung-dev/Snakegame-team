@@ -178,6 +178,40 @@ public:
 
 
 int main() {
+<<<<<<< hotfix/setup-logic-main
+    srand(time(0));
+    CONRAN r;
+    int Huong = 0;
+    bool pause = false;
+
+    r.Ve(r.A[r.DoDai - 1]);
+
+    while (true) {
+        if (kbhit()) {
+            char t = getch();
+            if (t == 27) break; // ESC
+            if (t == 'p' || t == 'P') pause = !pause;
+
+            if (!pause) {
+                if ((t == 'a' || t == 'A') && Huong != 0) Huong = 2;
+                if ((t == 'd' || t == 'D') && Huong != 2) Huong = 0;
+                if ((t == 'w' || t == 'W') && Huong != 1) Huong = 3;
+                if ((t == 's' || t == 'S') && Huong != 3) Huong = 1;
+            }
+        }
+
+        if (!pause) {
+            Point tail = r.DiChuyen(Huong);
+            if (r.KiemTraChet()) {
+                Beep(500, 1000);
+                break;
+            }
+            r.KiemTraAnMoi(tail);
+            r.Ve(tail);
+        }
+        Sleep(r.speed);
+    }
+=======
     cout << endl;
     system("mode con cols=100 lines=30");
     SetConsoleOutputCP(437);
@@ -193,5 +227,6 @@ int main() {
 
     // TODO: Chờ Hiếu ghép vòng lặp Logic vào
     
+>>>>>>> main
     return 0;
 }
