@@ -20,8 +20,14 @@ void SetColor(int color)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
+struct Point {
+    int x, y;
+};
+
+
 const int WIDTH = 50;
 const int HEIGHT = 20;
+
 
 void VeKhung() {
     SetColor(11); // cyan
@@ -74,6 +80,102 @@ void GameOverScreen(int score) {
     cout << "Press any key to exit...";
     getch();
 }
+
+// ================= GAME =================
+class CONRAN {
+public:
+    Point A[200];
+    int DoDai;
+    Point Moi;
+    int speed;
+    int score;
+
+    CONRAN() {
+        DoDai = 3;
+        A[0] = {10, 10};
+        A[1] = {8, 10};
+        A[2] = {6, 10};
+        speed = 150;
+        score = 0;
+        TaoMoi();
+    }
+
+    void TaoMoi() {
+        bool trung;
+        do {
+            trung = false;
+            // Đảm bảo mồi luôn xuất hiện ở tọa độ chẵn (2, 4, 6... 48)
+            Moi.x = (rand() % ((WIDTH - 2) / 2)) * 2 + 2;
+            Moi.y = rand() % (HEIGHT - 1) + 1; // y có thể lẻ
+
+
+
+
+            // Kiểm tra trùng thân rắn
+            for (int i = 0; i < DoDai; i++) {
+                if (A[i].x == Moi.x && A[i].y == Moi.y) {
+                    trung = true;
+                    break;
+                }
+            }
+        } while (trung);
+
+        SetColor(12);
+        gotoxy(Moi.x, Moi.y);
+        cout << char(219) << char(219);
+    }
+
+    Point DiChuyen(int Huong) {
+        Point tail = A[DoDai - 1];
+
+        for (int i = DoDai - 1; i > 0; i--)
+            A[i] = A[i - 1];
+
+        if (Huong == 0) A[0].x += 2; // Đi phải
+        if (Huong == 2) A[0].x -= 2; // Đi trái
+        if (Huong == 1) A[0].y++;    // Đi xuống
+        if (Huong == 3) A[0].y--;    // Đi lên
+
+        return tail;
+    }
+
+    void Ve(Point tail) {
+        if (tail.x != A[DoDai - 1].x || tail.y != A[DoDai - 1].y) {
+            gotoxy(tail.x, tail.y);
+            cout << "  "; 
+        }
+
+        for (int i = 0; i < DoDai; i++) {
+            SetColor(i == 0 ? 10 : 2); // Đầu màu xanh lá nhạt, thân xanh lá đậm
+            gotoxy(A[i].x, A[i].y);
+            cout << char(219) << char(219);
+        }
+    }
+
+    void KiemTraAnMoi(Point tail) {
+        if (A[0].x == Moi.x && A[0].y == Moi.y) {
+            A[DoDai] = tail;
+            DoDai++;
+            score += 10;
+            if (speed > 50) speed -= 5;
+            Beep(1500, 50);
+            TaoMoi();
+        }
+    }
+
+    bool KiemTraChet() {       
+        if (A[0].x < 2 || A[0].x > WIDTH - 2 || A[0].y <= 0 || A[0].y >= HEIGHT)
+            return true;
+
+        // Kiểm tra cắn vào thân
+        for (int i = 1; i < DoDai; i++)
+            if (A[0].x == A[i].x && A[0].y == A[i].y)
+                return true;
+        return false;
+    }
+
+};
+
 
 int main()
 {
