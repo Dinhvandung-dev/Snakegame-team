@@ -102,6 +102,36 @@ public:
         score = 0;
         TaoMoi();
     }
+
+    void TaoMoi() {
+        bool trung;
+        do {
+            trung = false;
+            // [SỬA ĐỔI] Mở rộng khu vực sinh mồi đến WIDTH - 2 (48)
+            // Đảm bảo mồi luôn xuất hiện ở tọa độ chẵn (2, 4, 6... 48)
+            Moi.x = (rand() % ((WIDTH - 2) / 2)) * 2 + 2;
+            Moi.y = rand() % (HEIGHT - 1) + 1; // y có thể lẻ
+
+
+
+
+            // Kiểm tra trùng thân rắn
+            for (int i = 0; i < DoDai; i++) {
+                if (A[i].x == Moi.x && A[i].y == Moi.y) {
+                    trung = true;
+                    break;
+                }
+            }
+        } while (trung);
+
+
+
+
+        SetColor(12);
+        gotoxy(Moi.x, Moi.y);
+        cout << char(219) << char(219);
+    }
+
 };
 
 
