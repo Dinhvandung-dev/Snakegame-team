@@ -159,6 +159,18 @@ public:
         }
     }
 
+    void KiemTraAnMoi(Point tail) {
+        if (A[0].x == Moi.x && A[0].y == Moi.y) {
+            A[DoDai] = tail;
+            DoDai++;
+            score += 10;
+            if (speed > 50) speed -= 5;
+            Beep(1500, 50);
+            TaoMoi();
+        }
+    }
+
+
 
 };
 
