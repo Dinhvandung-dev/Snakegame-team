@@ -177,8 +177,38 @@ public:
 };
 
 
-int main()
-{
-    // TODO: Setup game loop
+int main() {
+    srand(time(0));
+    CONRAN r;
+    int Huong = 0;
+    bool pause = false;
+
+    r.Ve(r.A[r.DoDai - 1]);
+
+    while (true) {
+        if (kbhit()) {
+            char t = getch();
+            if (t == 27) break; // ESC
+            if (t == 'p' || t == 'P') pause = !pause;
+
+            if (!pause) {
+                if ((t == 'a' || t == 'A') && Huong != 0) Huong = 2;
+                if ((t == 'd' || t == 'D') && Huong != 2) Huong = 0;
+                if ((t == 'w' || t == 'W') && Huong != 1) Huong = 3;
+                if ((t == 's' || t == 'S') && Huong != 3) Huong = 1;
+            }
+        }
+
+        if (!pause) {
+            Point tail = r.DiChuyen(Huong);
+            if (r.KiemTraChet()) {
+                Beep(500, 1000);
+                break;
+            }
+            r.KiemTraAnMoi(tail);
+            r.Ve(tail);
+        }
+        Sleep(r.speed);
+    }
     return 0;
 }
