@@ -107,7 +107,6 @@ public:
         bool trung;
         do {
             trung = false;
-            // [SỬA ĐỔI] Mở rộng khu vực sinh mồi đến WIDTH - 2 (48)
             // Đảm bảo mồi luôn xuất hiện ở tọa độ chẵn (2, 4, 6... 48)
             Moi.x = (rand() % ((WIDTH - 2) / 2)) * 2 + 2;
             Moi.y = rand() % (HEIGHT - 1) + 1; // y có thể lẻ
@@ -131,6 +130,20 @@ public:
         gotoxy(Moi.x, Moi.y);
         cout << char(219) << char(219);
     }
+
+    void Ve(Point tail) {
+        if (tail.x != A[DoDai - 1].x || tail.y != A[DoDai - 1].y) {
+            gotoxy(tail.x, tail.y);
+            cout << "  "; 
+        }
+
+        for (int i = 0; i < DoDai; i++) {
+            SetColor(i == 0 ? 10 : 2); // Đầu màu xanh lá nhạt, thân xanh lá đậm
+            gotoxy(A[i].x, A[i].y);
+            cout << char(219) << char(219);
+        }
+    }
+
 
 };
 
