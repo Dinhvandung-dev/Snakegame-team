@@ -131,6 +131,21 @@ public:
         cout << char(219) << char(219);
     }
 
+    Point DiChuyen(int Huong) {
+        Point tail = A[DoDai - 1];
+
+        for (int i = DoDai - 1; i > 0; i--)
+            A[i] = A[i - 1];
+
+        if (Huong == 0) A[0].x += 2; // Đi phải
+        if (Huong == 2) A[0].x -= 2; // Đi trái
+        if (Huong == 1) A[0].y++;    // Đi xuống
+        if (Huong == 3) A[0].y--;    // Đi lên
+
+        return tail;
+    }
+
+
     void Ve(Point tail) {
         if (tail.x != A[DoDai - 1].x || tail.y != A[DoDai - 1].y) {
             gotoxy(tail.x, tail.y);
