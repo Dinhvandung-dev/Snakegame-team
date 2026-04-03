@@ -60,6 +60,20 @@ void ManHinhStart() {
     getch();
     system("cls");
 }
+void GameOverScreen(int score) {
+    SetColor(12);
+    gotoxy(WIDTH / 2 - 5, HEIGHT / 2);
+    cout << "GAME OVER!";
+
+    SetColor(14);
+    gotoxy(WIDTH / 2 - 6, HEIGHT / 2 + 1);
+    cout << "Score: " << score;
+
+    SetColor(7);
+    gotoxy(WIDTH / 2 - 10, HEIGHT / 2 + 3);
+    cout << "Press any key to exit...";
+    getch();
+}
 
 int main()
 {
