@@ -52,6 +52,15 @@ void VeThongTin(int score, int speed) {
     gotoxy(WIDTH + 4, 9); cout << "ESC: Exit";
 }
 
+void ManHinhStart() {
+    system("cls");
+    SetColor(10);
+    gotoxy(20, 8); cout << "SNAKE GAME";
+    gotoxy(18, 10); cout << "Press any key to start...";
+    getch();
+    system("cls");
+}
+
 int main()
 {
     // TODO: Setup game loop
