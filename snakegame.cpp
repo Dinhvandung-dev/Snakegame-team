@@ -20,8 +20,14 @@ void SetColor(int color)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
+struct Point {
+    int x, y;
+};
+
+
 const int WIDTH = 50;
 const int HEIGHT = 20;
+
 
 void VeKhung() {
     SetColor(11); // cyan
@@ -74,6 +80,30 @@ void GameOverScreen(int score) {
     cout << "Press any key to exit...";
     getch();
 }
+
+// ================= GAME =================
+class CONRAN {
+public:
+    Point A[200];
+    int DoDai;
+    Point Moi;
+    int speed;
+    int score;
+
+
+
+
+    CONRAN() {
+        DoDai = 3;
+        A[0] = {10, 10};
+        A[1] = {8, 10};
+        A[2] = {6, 10};
+        speed = 150;
+        score = 0;
+        TaoMoi();
+    }
+};
+
 
 int main()
 {
