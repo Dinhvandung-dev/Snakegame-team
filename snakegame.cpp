@@ -178,20 +178,25 @@ public:
 
 
 int main() {
-<<<<<<< hotfix/setup-logic-main
+    cout << endl;
+    system("mode con cols=100 lines=30");
+    SetConsoleOutputCP(437);
     srand(time(0));
+    CONSOLE_CURSOR_INFO info;
+    GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+    info.bVisible = false;
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+    ManHinhStart();
+    VeKhung();
     CONRAN r;
     int Huong = 0;
     bool pause = false;
-
     r.Ve(r.A[r.DoDai - 1]);
-
     while (true) {
         if (kbhit()) {
             char t = getch();
             if (t == 27) break; // ESC
             if (t == 'p' || t == 'P') pause = !pause;
-
             if (!pause) {
                 if ((t == 'a' || t == 'A') && Huong != 0) Huong = 2;
                 if ((t == 'd' || t == 'D') && Huong != 2) Huong = 0;
@@ -199,34 +204,18 @@ int main() {
                 if ((t == 's' || t == 'S') && Huong != 3) Huong = 1;
             }
         }
-
         if (!pause) {
             Point tail = r.DiChuyen(Huong);
-            if (r.KiemTraChet()) {
+                if (r.KiemTraChet()) {
                 Beep(500, 1000);
+                GameOverScreen(r.score);
                 break;
             }
             r.KiemTraAnMoi(tail);
             r.Ve(tail);
         }
+        VeThongTin(r.score, r.speed);
         Sleep(r.speed);
     }
-=======
-    cout << endl;
-    system("mode con cols=100 lines=30");
-    SetConsoleOutputCP(437);
-    
-    CONSOLE_CURSOR_INFO info;
-    GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-    info.bVisible = false;
-    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-
-    ManHinhStart();
-    VeKhung();
-    VeThongTin(0, 150);
-
-    // TODO: Chờ Hiếu ghép vòng lặp Logic vào
-    
->>>>>>> main
     return 0;
 }
