@@ -40,6 +40,18 @@ void VeKhung() {
     }
 }
 
+void VeThongTin(int score, int speed) {
+    SetColor(14); // vàng
+    gotoxy(WIDTH + 4, 2); cout << "SNAKE GAME";
+    gotoxy(WIDTH + 4, 4); cout << "Score: " << score;
+    gotoxy(WIDTH + 4, 5); cout << "Speed: " << 200 - speed;
+
+    SetColor(10);
+    gotoxy(WIDTH + 4, 7); cout << "W A S D: Move";
+    gotoxy(WIDTH + 4, 8); cout << "P: Pause";
+    gotoxy(WIDTH + 4, 9); cout << "ESC: Exit";
+}
+
 int main()
 {
     // TODO: Setup game loop
